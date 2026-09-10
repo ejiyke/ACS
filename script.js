@@ -148,6 +148,111 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const servicesInquiryForm = document.getElementById('servicesInquiryForm');
+  if (servicesInquiryForm) {
+    servicesInquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      servicesInquiryForm.reset();
+      showToast('Thank you! Our veteran solutions team will get in touch with you shortly.');
+    });
+  }
+
+  // --- Digital Inquiry Form (contact.html) ---
+  const digitalInquiryForm = document.getElementById('digitalInquiryForm');
+  if (digitalInquiryForm) {
+    digitalInquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const firstName = document.getElementById('inquiryFirstName')?.value || 'there';
+      digitalInquiryForm.reset();
+      showToast(`Thank you, ${firstName}! Your inquiry has been encrypted and submitted to our procurement team.`);
+    });
+  }
+
+  // --- Copy Email Button (contact.html) ---
+  const copyEmailBtn = document.getElementById('copyEmailBtn');
+  const procurementEmail = document.getElementById('procurementEmail');
+  if (copyEmailBtn && procurementEmail) {
+    copyEmailBtn.addEventListener('click', async () => {
+      const emailText = procurementEmail.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(emailText);
+        const originalHtml = copyEmailBtn.innerHTML;
+        copyEmailBtn.innerHTML = `
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span style="color: #10b981;">Copied!</span>
+        `;
+        showToast('Procurement email copied to clipboard!');
+        setTimeout(() => {
+          copyEmailBtn.innerHTML = originalHtml;
+        }, 2500);
+      } catch (err) {
+        showToast('Email: ' + emailText);
+      }
+    });
+  }
+
+  // --- Career Application Form & Resume Dropzone (careers.html) ---
+  const careerApplicationForm = document.getElementById('careerApplicationForm');
+  const resumeDropzone = document.getElementById('resumeDropzone');
+  const resumeFileInput = document.getElementById('resumeFileInput');
+
+  if (resumeDropzone && resumeFileInput) {
+    resumeDropzone.addEventListener('click', () => {
+      resumeFileInput.click();
+    });
+
+    resumeFileInput.addEventListener('change', () => {
+      if (resumeFileInput.files.length > 0) {
+        const fileName = resumeFileInput.files[0].name;
+        const textEl = resumeDropzone.querySelector('.dropzone-text');
+        if (textEl) {
+          textEl.innerHTML = `Selected file: <strong>${fileName}</strong>`;
+        }
+      }
+    });
+
+    // Drag & Drop
+    ['dragenter', 'dragover'].forEach(eventName => {
+      resumeDropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        resumeDropzone.style.borderColor = 'var(--color-cyan)';
+        resumeDropzone.style.backgroundColor = '#f0f9ff';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      resumeDropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        resumeDropzone.style.borderColor = '';
+        resumeDropzone.style.backgroundColor = '';
+      });
+    });
+
+    resumeDropzone.addEventListener('drop', (e) => {
+      if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+        const file = e.dataTransfer.files[0];
+        const textEl = resumeDropzone.querySelector('.dropzone-text');
+        if (textEl) {
+          textEl.innerHTML = `Selected file: <strong>${file.name}</strong>`;
+        }
+      }
+    });
+  }
+
+  if (careerApplicationForm) {
+    careerApplicationForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      careerApplicationForm.reset();
+      const textEl = resumeDropzone?.querySelector('.dropzone-text');
+      if (textEl) {
+        textEl.innerHTML = 'Drag & drop your resume here or <span>click to browse</span>';
+      }
+      showToast('Application submitted successfully! Our acquisition team will review your resume.');
+    });
+  }
+
   // --- Smooth Scroll Offset Compensation ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -166,3 +271,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
