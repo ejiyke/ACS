@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" width="100%" height="100%" fill="none">
+  <!-- Top decorative bar -->
+  <path d="M 40 16 L 120 16 L 105 32 L 55 32 Z" fill="#00a3e0" opacity="0.95"/>
+  
+  <!-- Left wing element -->
+  <path d="M 12 24 L 35 24 C 38 24 40 28 40 32 C 40 36 38 40 35 40 L 12 40 Z" fill="#0099d8"/>
+  <path d="M 12 43 L 35 43 C 38 43 40 47 40 51 C 40 55 38 59 35 59 L 12 59 Z" fill="#0099d8"/>
+
+  <!-- Right wing element -->
+  <path d="M 148 24 L 125 24 C 122 24 120 28 120 32 C 120 36 122 40 125 40 L 148 40 Z" fill="#0099d8"/>
+  <path d="M 148 43 L 125 43 C 122 43 120 47 120 51 C 120 55 122 59 125 59 L 148 59 Z" fill="#0099d8"/>
+
+  <!-- Bottom inverted decorative element -->
+  <path d="M 55 52 L 105 52 L 80 66 Z" fill="#00a3e0" opacity="0.95"/>
+
+  <!-- Central connecting line -->
+  <line x1="28" y1="41.5" x2="132" y2="41.5" stroke="#00b4d8" stroke-width="1.5" opacity="0.8"/>
+
+  <!-- ACS Acronym in Serif typography -->
+  <text x="80" y="47" font-family="'Times New Roman', Georgia, serif" font-size="21" font-weight="bold" fill="#00c8f8" text-anchor="middle" letter-spacing="1.5" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.5))">ACS</text>
+</svg>
