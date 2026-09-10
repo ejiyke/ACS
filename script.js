@@ -60,6 +60,18 @@ document.addEventListener('DOMContentLoaded', () => {
     openConsultationBtn.addEventListener('click', () => openModal());
   }
 
+  const openTeamingBtn = document.getElementById('openTeamingBtn');
+  if (openTeamingBtn) {
+    openTeamingBtn.addEventListener('click', () => openModal('Prime / Subcontractor Teaming'));
+  }
+
+  const downloadCapabilityBtn = document.getElementById('downloadCapabilityBtn');
+  if (downloadCapabilityBtn) {
+    downloadCapabilityBtn.addEventListener('click', () => {
+      showToast('Downloading official ACS Capability Statement PDF briefing...');
+    });
+  }
+
   if (mobileConsultationBtn) {
     mobileConsultationBtn.addEventListener('click', () => {
       if (mobileMenu) mobileMenu.classList.remove('open');
