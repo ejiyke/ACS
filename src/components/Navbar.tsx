@@ -14,13 +14,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBriefing }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent background scrolling when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   const services = [
     { title: 'Federal Financial ERP Modernization', desc: 'Oracle Federal Financials, SAP S/4HANA Public Sector, Momentum implementations', href: '#services' },
@@ -33,18 +45,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBriefing }) => {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-black/60 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/50 py-3.5'
-          : 'bg-transparent border-b border-transparent py-5'
+          ? 'bg-black/85 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/50 py-3 sm:py-3.5'
+          : 'bg-black/30 backdrop-blur-sm sm:bg-transparent border-b border-white/5 sm:border-transparent py-3 sm:py-5'
       }`}
     >
-      <div className="px-8 md:px-28 flex items-center justify-between relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 lg:px-28 flex items-center justify-between relative">
         {/* Left: ACS Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center shrink-0">
           <a href="#" className="flex items-center group focus:outline-none" aria-label="ACS - Accounting & Computer Solutions">
             <img
               src="/logo.svg"
               alt="ACS - Accounting & Computer Solutions Logo"
-              className="h-10 md:h-11 w-auto object-contain transition-transform group-hover:scale-105 duration-200 drop-shadow-sm"
+              className="h-8 sm:h-10 md:h-11 w-auto object-contain transition-transform group-hover:scale-105 duration-200 drop-shadow-sm"
             />
           </a>
         </div>
@@ -53,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBriefing }) => {
         <nav className="hidden md:flex items-center justify-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Main Navigation">
           <a
             href="#company"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground px-3.5 py-2 rounded-md transition-colors hover:bg-white/5"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground px-3 py-2 rounded-md transition-colors hover:bg-white/5"
           >
             Company
           </a>
@@ -67,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBriefing }) => {
             <button
               type="button"
               onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-              className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground px-3.5 py-2 rounded-md transition-colors hover:bg-white/5 focus:outline-none"
+              className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground px-3 py-2 rounded-md transition-colors hover:bg-white/5 focus:outline-none"
             >
               <span>Services</span>
               <ChevronDown
@@ -118,93 +130,101 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBriefing }) => {
 
           <a
             href="#clients"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground px-3.5 py-2 rounded-md transition-colors hover:bg-white/5"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground px-3 py-2 rounded-md transition-colors hover:bg-white/5"
           >
             Clients
           </a>
 
           <a
             href="#vehicles"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground px-3.5 py-2 rounded-md transition-colors hover:bg-white/5"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground px-3 py-2 rounded-md transition-colors hover:bg-white/5"
           >
             Contract Vehicles
           </a>
 
           <a
             href="#careers"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground px-3.5 py-2 rounded-md transition-colors hover:bg-white/5"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground px-3 py-2 rounded-md transition-colors hover:bg-white/5"
           >
             Careers
           </a>
         </nav>
 
-        {/* Right: CTA Button with Energetic Pulse */}
-        <div className="flex items-center gap-3">
+        {/* Right: CTA Button & Mobile Trigger */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Header CTA Button - Compact on small screens, full on desktop */}
           <motion.button
             onClick={onOpenBriefing}
             whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
             whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
-            className="relative group bg-[#00a3e0] hover:bg-[#00b8fc] text-white rounded-full text-sm font-semibold px-5 py-2.5 transition-all shadow-md shadow-[#00a3e0]/25 hover:shadow-lg hover:shadow-[#00a3e0]/40 overflow-hidden"
+            className="relative group bg-[#00a3e0] hover:bg-[#00b8fc] text-white rounded-full text-xs sm:text-sm font-semibold px-3.5 py-1.5 sm:px-5 sm:py-2.5 transition-all shadow-md shadow-[#00a3e0]/25 hover:shadow-lg hover:shadow-[#00a3e0]/40 overflow-hidden shrink-0"
           >
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-            <span className="relative z-10">Schedule Briefing</span>
+            <span className="relative z-10 whitespace-nowrap">Schedule Briefing</span>
           </motion.button>
 
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-white/5 transition-colors focus:outline-none"
+            className="md:hidden p-2 text-zinc-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors focus:outline-none shrink-0"
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu with Full-Screen App Sheet Experience */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b border-white/10 bg-black/95 px-8 py-6 space-y-4 backdrop-blur-2xl overflow-hidden"
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden border-b border-white/10 bg-black/95 px-6 py-6 space-y-4 backdrop-blur-2xl overflow-hidden max-h-[calc(100vh-60px)] overflow-y-auto"
           >
-            <div className="space-y-1">
+            <div className="space-y-1.5 pt-2">
               <a
                 href="#company"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-base font-medium text-foreground py-2 px-3 rounded-lg hover:bg-white/5"
+                className="flex items-center justify-between text-base font-medium text-foreground py-2.5 px-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors"
               >
-                Company
+                <span>Company</span>
+                <ArrowRight className="w-4 h-4 text-zinc-500" />
               </a>
               <a
                 href="#services"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-base font-medium text-foreground py-2 px-3 rounded-lg hover:bg-white/5"
+                className="flex items-center justify-between text-base font-medium text-foreground py-2.5 px-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors"
               >
-                Services &amp; Capabilities
+                <span>Services &amp; Capabilities</span>
+                <ArrowRight className="w-4 h-4 text-zinc-500" />
               </a>
               <a
                 href="#clients"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-base font-medium text-foreground py-2 px-3 rounded-lg hover:bg-white/5"
+                className="flex items-center justify-between text-base font-medium text-foreground py-2.5 px-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors"
               >
-                Clients &amp; Testimonials
+                <span>Clients &amp; Testimonials</span>
+                <ArrowRight className="w-4 h-4 text-zinc-500" />
               </a>
               <a
                 href="#vehicles"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-base font-medium text-foreground py-2 px-3 rounded-lg hover:bg-white/5"
+                className="flex items-center justify-between text-base font-medium text-foreground py-2.5 px-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors"
               >
-                Contract Vehicles &amp; Socioeconomic
+                <span>Contract Vehicles &amp; Socioeconomic</span>
+                <ArrowRight className="w-4 h-4 text-zinc-500" />
               </a>
               <a
                 href="#careers"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-base font-medium text-foreground py-2 px-3 rounded-lg hover:bg-white/5"
+                className="flex items-center justify-between text-base font-medium text-foreground py-2.5 px-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors"
               >
-                Careers
+                <span>Careers</span>
+                <ArrowRight className="w-4 h-4 text-zinc-500" />
               </a>
             </div>
 
@@ -216,7 +236,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBriefing }) => {
                 }}
                 whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
                 whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
-                className="w-full bg-[#00a3e0] hover:bg-[#00b8fc] text-white rounded-full text-sm font-semibold py-3 hover:shadow-lg hover:shadow-[#00a3e0]/30 transition-all text-center shadow-lg shadow-[#00a3e0]/20"
+                className="w-full bg-[#00a3e0] hover:bg-[#00b8fc] text-white rounded-full text-sm font-semibold py-3.5 hover:shadow-lg hover:shadow-[#00a3e0]/30 transition-all text-center shadow-lg shadow-[#00a3e0]/20"
               >
                 Schedule Executive Briefing
               </motion.button>

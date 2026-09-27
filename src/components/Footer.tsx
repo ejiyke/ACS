@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, ArrowUp, Mail, Phone, MapPin, Building, FileCheck } from 'lucide-react';
+import { Shield, ArrowUp, Mail, Phone, MapPin } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -8,21 +8,21 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="bg-black border-t border-white/10 text-muted-foreground relative z-20">
-      <div className="max-w-7xl mx-auto px-8 md:px-28 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-28 py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-white/10">
           {/* Brand Col */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="sm:col-span-2 space-y-3.5 sm:space-y-4">
             <a href="#" className="inline-block group focus:outline-none" aria-label="ACS - Accounting & Computer Solutions">
               <img
                 src="/logo.svg"
                 alt="ACS - Accounting & Computer Solutions Logo"
-                className="h-12 md:h-14 w-auto object-contain transition-transform group-hover:scale-105 duration-200"
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform group-hover:scale-105 duration-200"
               />
             </a>
-            <p className="text-xs md:text-sm text-zinc-400 leading-relaxed max-w-sm">
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-sm">
               Delivering high-performance IT and financial strategy consulting to federal, state, and commercial clients nationwide.
             </p>
-            <div className="flex items-center gap-3 pt-2 text-xs text-zinc-500 font-mono">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-1 text-[11px] sm:text-xs text-zinc-500 font-mono">
               <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400">
                 CAGE: 3Y7B2
               </span>
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Quick Nav Col */}
-          <div className="space-y-3">
+          <div className="space-y-2.5 sm:space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white">
               Specialties
             </h4>
@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Vehicles Col */}
-          <div className="space-y-3">
+          <div className="space-y-2.5 sm:space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white">
               Contract Vehicles
             </h4>
@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Contact Col */}
-          <div className="space-y-3">
+          <div className="space-y-2.5 sm:space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white">
               Headquarters
             </h4>
@@ -117,7 +117,7 @@ export const Footer: React.FC = () => {
                 <span>Toll-Free: (800) 555-0200</span>
               </div>
               <div className="flex items-center gap-2 pt-1 text-[11px] text-zinc-500">
-                <Shield className="w-3.5 h-3.5 text-emerald-400" />
+                <Shield className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>Active SAM.gov Registered Entity</span>
               </div>
             </div>
@@ -125,11 +125,11 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+        <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 text-center sm:text-left">
           <div>
             &copy; {new Date().getFullYear()} Accounting &amp; Computer Solutions, Inc. All rights reserved.
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <a href="#" className="hover:text-white transition-colors">
               Privacy Policy
             </a>
@@ -141,7 +141,7 @@ export const Footer: React.FC = () => {
             </a>
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1 hover:text-white transition-colors ml-2"
+              className="flex items-center gap-1 hover:text-white transition-colors ml-1"
             >
               <span>Top</span>
               <ArrowUp className="w-3.5 h-3.5" />

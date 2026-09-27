@@ -28,7 +28,7 @@ const RevealWord: React.FC<RevealWordProps> = ({
   return (
     <motion.span
       style={{ color, opacity }}
-      className="mr-[0.3em] inline-block transition-colors duration-75 select-none"
+      className="mr-[0.25em] sm:mr-[0.3em] inline-block transition-colors duration-75 select-none"
     >
       {word}
     </motion.span>
@@ -72,26 +72,26 @@ export const TestimonialSection: React.FC = () => {
     <section
       ref={quoteRef}
       id="clients"
-      className="min-h-screen flex flex-col justify-center py-28 md:py-36 px-8 md:px-28 relative z-20 bg-black"
+      className="flex flex-col justify-center py-16 sm:py-24 md:py-36 px-4 sm:px-8 md:px-28 relative z-20 bg-black"
     >
       {/* Ambient background glow */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-white/[0.02] blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 bg-white/[0.02] blur-[100px] sm:blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto flex flex-col items-start gap-8 w-full">
+      <div className="max-w-4xl mx-auto flex flex-col items-start gap-6 sm:gap-8 w-full">
         {/* Quote Icon */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <img
             src="/quote-symbol.png"
             alt="Quote mark"
-            className="w-12 h-9 object-contain opacity-70 filter invert"
+            className="w-8 sm:w-12 h-6 sm:h-9 object-contain opacity-70 filter invert shrink-0"
           />
-          <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold font-mono">
+          <span className="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-zinc-500 font-semibold font-mono">
             Executive Endorsement &bull; Federal Systems Transformation
           </span>
         </div>
 
         {/* Scroll-Driven Word Reveal Typography */}
-        <div className="text-3xl md:text-5xl font-medium leading-[1.25] flex flex-wrap tracking-tight">
+        <div className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-medium leading-[1.3] sm:leading-[1.25] flex flex-wrap tracking-tight">
           {words.map((word, i) => {
             const start = i / total;
             const end = (i + 1) / total;
@@ -105,7 +105,7 @@ export const TestimonialSection: React.FC = () => {
               />
             );
           })}
-          <span className="text-muted-foreground ml-1 font-serif text-4xl md:text-6xl inline-block select-none">
+          <span className="text-muted-foreground ml-1 font-serif text-3xl sm:text-4xl md:text-6xl inline-block select-none">
             ”
           </span>
         </div>
@@ -113,18 +113,18 @@ export const TestimonialSection: React.FC = () => {
         {/* Author Info Row with Spring Scale and Fade */}
         <motion.div
           style={{ opacity: authorOpacity, scale: authorScale, y: authorY }}
-          className="flex items-center gap-4 mt-4 pt-6 border-t border-white/10 w-full max-w-xl"
+          className="flex items-center gap-3.5 sm:gap-4 mt-3 sm:mt-4 pt-5 sm:pt-6 border-t border-white/10 w-full max-w-xl"
         >
           <img
             src="/testimonial-avatar.png"
             alt="Anthony T. Stevenson"
-            className="w-14 h-14 rounded-full border-2 border-white/20 object-cover shadow-lg"
+            className="w-11 h-11 sm:w-14 sm:h-14 rounded-full border-2 border-white/20 object-cover shadow-lg shrink-0"
           />
           <div>
-            <div className="text-base font-semibold leading-snug text-foreground">
+            <div className="text-sm sm:text-base font-semibold leading-snug text-foreground">
               Anthony T. Stevenson
             </div>
-            <div className="text-sm font-normal text-muted-foreground">
+            <div className="text-xs sm:text-sm font-normal text-muted-foreground mt-0.5">
               President &amp; CEO, Accounting &amp; Computer Solutions, Inc.
             </div>
           </div>

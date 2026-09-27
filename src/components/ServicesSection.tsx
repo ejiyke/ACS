@@ -168,12 +168,12 @@ const ServiceCard: React.FC<{
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
       onClick={onSelect}
-      whileHover={prefersReducedMotion ? {} : { scale: 1.015 }}
+      whileHover={prefersReducedMotion ? {} : { scale: 1.012 }}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       className={`relative rounded-2xl border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden cursor-pointer flex flex-col justify-between ${
         isExpanded
-          ? 'lg:flex-[2.8] bg-gradient-to-b from-zinc-900/95 to-zinc-950/98 border-[#00a3e0] shadow-2xl shadow-[#00a3e0]/15 p-6 md:p-8'
-          : 'lg:flex-1 bg-white/[0.015] hover:bg-white/[0.035] border-white/10 hover:border-[#38bdf8]/60 p-5 md:p-6'
+          ? 'lg:flex-[2.8] bg-gradient-to-b from-zinc-900/95 to-zinc-950/98 border-[#00a3e0] shadow-2xl shadow-[#00a3e0]/15 p-5 sm:p-6 md:p-8'
+          : 'lg:flex-1 bg-white/[0.015] hover:bg-white/[0.035] border-white/10 hover:border-[#38bdf8]/60 p-4 sm:p-5 md:p-6'
       }`}
     >
       {/* Interactive Mouse-Tracking Radial Gradient Glow */}
@@ -197,10 +197,10 @@ const ServiceCard: React.FC<{
 
       {/* Card Content Top Section */}
       <div className="relative z-10">
-        <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/5">
-          <div className="flex items-center gap-2.5">
+        <div className="flex items-center justify-between mb-3.5 sm:mb-4 pb-2.5 sm:pb-3 border-b border-white/5">
+          <div className="flex items-center gap-2">
             <span
-              className={`font-mono text-xs font-semibold px-2 py-0.5 rounded transition-colors ${
+              className={`font-mono text-[11px] sm:text-xs font-semibold px-2 py-0.5 rounded transition-colors ${
                 isExpanded
                   ? 'bg-[#00a3e0]/20 text-[#00a3e0] border border-[#00a3e0]/30'
                   : 'bg-white/5 text-zinc-500'
@@ -208,19 +208,19 @@ const ServiceCard: React.FC<{
             >
               {item.number}
             </span>
-            <span className="text-[11px] font-medium uppercase tracking-wider text-zinc-400">
+            <span className="text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-zinc-400">
               {item.category}
             </span>
           </div>
 
           <div
-            className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 ${
+            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 ${
               isExpanded
                 ? 'bg-[#00a3e0] text-white border-[#00a3e0] shadow-md shadow-[#00a3e0]/30'
                 : 'bg-white/5 text-zinc-400 border-white/10'
             }`}
           >
-            <IconComponent className="w-4 h-4" />
+            <IconComponent className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </div>
         </div>
 
@@ -228,8 +228,8 @@ const ServiceCard: React.FC<{
         <h3
           className={`font-semibold tracking-tight transition-all duration-300 mb-2 ${
             isExpanded
-              ? 'text-2xl md:text-3xl text-white'
-              : 'text-lg md:text-xl text-zinc-300 group-hover:text-white'
+              ? 'text-xl sm:text-2xl md:text-3xl text-white'
+              : 'text-base sm:text-lg md:text-xl text-zinc-300 group-hover:text-white'
           }`}
         >
           {item.title}
@@ -241,7 +241,7 @@ const ServiceCard: React.FC<{
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
-            className="mb-4 inline-flex items-center gap-1.5 text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-[#00a3e0]/10 text-[#00a3e0] border border-[#00a3e0]/25"
+            className="mb-3.5 sm:mb-4 inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-[#00a3e0]/10 text-[#00a3e0] border border-[#00a3e0]/25"
           >
             <Sparkles className="w-3 h-3" />
             <span>{item.badgeText}</span>
@@ -251,7 +251,7 @@ const ServiceCard: React.FC<{
         {/* Summary */}
         <p
           className={`text-zinc-400 leading-relaxed transition-all duration-300 ${
-            isExpanded ? 'text-sm mb-5 text-zinc-300' : 'text-xs line-clamp-3'
+            isExpanded ? 'text-xs sm:text-sm mb-4 sm:mb-5 text-zinc-300' : 'text-xs line-clamp-2 sm:line-clamp-3'
           }`}
         >
           {item.summary}
@@ -269,17 +269,17 @@ const ServiceCard: React.FC<{
                 damping: 24,
                 stiffness: 200,
               }}
-              className="space-y-4 mb-6 overflow-hidden"
+              className="space-y-3.5 sm:space-y-4 mb-4 sm:mb-6 overflow-hidden"
             >
               <div>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400 block mb-2 font-mono">
+                <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-zinc-400 block mb-2 font-mono">
                   Key Technical Deliverables
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
                   {item.deliverables.map((d, dIdx) => (
                     <div
                       key={dIdx}
-                      className="flex items-center gap-2 p-2 rounded-lg bg-black/40 border border-white/5 text-xs text-zinc-200"
+                      className="flex items-center gap-2 p-2 rounded-lg bg-black/40 border border-white/5 text-[11px] sm:text-xs text-zinc-200"
                     >
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#00a3e0] shrink-0" />
                       <span className="truncate">{d}</span>
@@ -293,7 +293,7 @@ const ServiceCard: React.FC<{
                 {item.tags.map((tag, tIdx) => (
                   <span
                     key={tIdx}
-                    className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-zinc-300"
+                    className="text-[10px] sm:text-[11px] font-medium px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-zinc-300"
                   >
                     {tag}
                   </span>
@@ -305,14 +305,14 @@ const ServiceCard: React.FC<{
       </div>
 
       {/* Card Content Bottom / Metric Counter */}
-      <div className="relative z-10 pt-4 border-t border-white/5 flex items-center justify-between gap-2 mt-4">
+      <div className="relative z-10 pt-3.5 sm:pt-4 border-t border-white/5 flex items-center justify-between gap-2 mt-3 sm:mt-4">
         <div className="text-xs">
-          <span className="text-zinc-500 text-[11px] block font-mono">
+          <span className="text-zinc-500 text-[10px] sm:text-[11px] block font-mono">
             {item.impactMetric.label}
           </span>
           <span
             className={`font-bold transition-colors ${
-              isExpanded ? 'text-lg text-white font-mono' : 'text-sm text-zinc-300'
+              isExpanded ? 'text-base sm:text-lg text-white font-mono' : 'text-xs sm:text-sm text-zinc-300'
             }`}
           >
             <MetricCounter value={item.impactMetric.value} inView={inView} />
@@ -324,7 +324,7 @@ const ServiceCard: React.FC<{
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             href="#contact"
-            className="inline-flex items-center gap-1.5 bg-[#00a3e0] hover:bg-[#00b8fc] text-white text-xs font-semibold px-4 py-2 rounded-full shadow-md shadow-[#00a3e0]/25 transition-all group shrink-0"
+            className="inline-flex items-center gap-1.5 bg-[#00a3e0] hover:bg-[#00b8fc] text-white text-xs font-semibold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-md shadow-[#00a3e0]/25 transition-all group shrink-0"
           >
             <span>Engage Practice</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -343,45 +343,45 @@ const ServiceCard: React.FC<{
 export const ServicesSection: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number>(0);
   const containerRef = useRef<HTMLElement>(null);
-  const inView = useInView(containerRef, { once: true, amount: 0.4 });
+  const inView = useInView(containerRef, { once: true, amount: 0.3 });
 
   return (
     <section
       ref={containerRef}
       id="services"
-      className="py-24 md:py-32 px-6 md:px-12 lg:px-20 bg-black relative border-t border-white/5 overflow-hidden"
+      className="py-14 sm:py-20 md:py-32 px-4 sm:px-8 lg:px-20 bg-black relative border-t border-white/5 overflow-hidden"
     >
       {/* Subtle ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#00a3e0]/[0.025] blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[900px] h-[300px] sm:h-[400px] bg-[#00a3e0]/[0.025] blur-[120px] sm:blur-[160px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 md:mb-14 gap-4 sm:gap-6">
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
               <span className="w-2 h-2 rounded-full bg-[#00a3e0] animate-pulse" />
-              <span className="text-xs font-semibold tracking-widest text-[#00a3e0] uppercase">
+              <span className="text-[11px] sm:text-xs font-semibold tracking-widest text-[#00a3e0] uppercase">
                 Capabilities Architecture
               </span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-white leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-white leading-tight">
               Our Core Consulting <br />
               <span className="font-serif italic font-normal text-zinc-300">Specialties.</span>
             </h2>
           </div>
           <div className="max-w-md">
-            <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-3">
+            <p className="text-xs sm:text-sm md:text-base text-zinc-400 leading-relaxed mb-2.5 sm:mb-3">
               Integrated management strategy, audit-ready financial modernization, and secure GovCloud infrastructure tailored for public and commercial enterprise missions.
             </p>
-            <div className="flex items-center gap-2 text-xs text-zinc-500 font-mono">
+            <div className="flex items-center gap-2 text-[11px] sm:text-xs text-zinc-500 font-mono">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#00a3e0]" />
-              <span>Hover across practice areas to expand full capabilities</span>
+              <span>Tap or hover across practice areas to expand</span>
             </div>
           </div>
         </div>
 
-        {/* Horizontal Expandable Feature Stack */}
-        <div className="flex flex-col lg:flex-row gap-4 md:gap-5 items-stretch min-h-[480px] lg:min-h-[520px]">
+        {/* Expandable Feature Stack */}
+        <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-5 items-stretch min-h-[420px] lg:min-h-[520px]">
           {specialties.map((item, idx) => (
             <ServiceCard
               key={item.id}

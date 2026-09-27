@@ -21,14 +21,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const heroTextY = useTransform(
     scrollYProgress,
     [0, 0.45],
-    prefersReducedMotion ? [0, 0] : [0, -120]
+    prefersReducedMotion ? [0, 0] : [0, -100]
   );
   const heroTextOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
 
   const dashboardY = useTransform(
     scrollYProgress,
     [0, 1],
-    prefersReducedMotion ? [0, 0] : [0, -180]
+    prefersReducedMotion ? [0, 0] : [0, -140]
   );
   const dashboardScale = useTransform(
     scrollYProgress,
@@ -60,7 +60,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   const wordVariants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 28 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -74,26 +74,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-background pt-20 pb-16 md:pt-24 md:pb-24"
+      className="relative w-full overflow-hidden bg-background pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-24 px-4 sm:px-6"
       id="hero"
     >
       {/* Ambient background cyan radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-brand-cyan/[0.05] blur-[140px] pointer-events-none rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[1000px] h-[350px] sm:h-[450px] bg-brand-cyan/[0.05] blur-[100px] sm:blur-[140px] pointer-events-none rounded-full" />
 
       {/* Hero Content Area */}
       <motion.div
         style={{ y: heroTextY, opacity: heroTextOpacity }}
-        className="flex flex-col items-center text-center mt-10 md:mt-16 px-4 relative z-20 max-w-5xl mx-auto"
+        className="flex flex-col items-center text-center mt-4 sm:mt-8 md:mt-12 px-2 sm:px-4 relative z-20 max-w-5xl mx-auto"
       >
         {/* 1. Tag Pill */}
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass border border-white/10 mb-6 shadow-sm"
+          className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full liquid-glass border border-white/10 mb-5 sm:mb-6 shadow-sm max-w-full"
         >
-          <span className="w-2 h-2 rounded-full bg-[#00a3e0] animate-pulse" />
-          <span className="text-xs md:text-sm font-medium text-zinc-300 tracking-wide">
+          <span className="w-2 h-2 rounded-full bg-[#00a3e0] animate-pulse shrink-0" />
+          <span className="text-[11px] sm:text-xs md:text-sm font-medium text-zinc-300 tracking-wide truncate">
             Mission-Critical Federal &amp; Commercial Consulting
           </span>
         </motion.div>
@@ -103,7 +103,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[-2px] font-medium leading-[1.15] md:leading-[1.12] mb-6 text-foreground max-w-4xl flex flex-wrap justify-center gap-x-[0.3em] gap-y-1"
+          className="text-[28px] leading-[1.2] sm:text-4xl md:text-6xl lg:text-7xl tracking-tight font-medium sm:leading-[1.14] mb-5 sm:mb-6 text-foreground max-w-4xl flex flex-wrap justify-center gap-x-[0.25em] sm:gap-x-[0.3em] gap-y-0.5 sm:gap-y-1"
         >
           {headlineWords.map((word, idx) => (
             <motion.span
@@ -144,13 +144,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </motion.span>
         </motion.h1>
 
-        {/* 3. Subtitle (Fade in with 0.2s delay) */}
+        {/* 3. Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{ color: 'hsl(var(--hero-subtitle))' }}
-          className="text-base md:text-lg font-normal leading-relaxed opacity-90 mb-8 max-w-3xl text-center"
+          className="text-sm sm:text-base md:text-lg font-normal leading-relaxed opacity-90 mb-6 sm:mb-8 max-w-2xl sm:max-w-3xl text-center px-1"
         >
           Integrating IT strategy, financial systems modernization, project management, and business process transformation to deliver mission-critical results.
         </motion.p>
@@ -160,14 +160,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex items-center justify-center"
+          className="w-full sm:w-auto flex items-center justify-center"
         >
           <motion.a
             href="#services"
             onClick={onExploreServices}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="relative group inline-flex items-center justify-center gap-2 bg-[#00a3e0] hover:bg-[#00b8fc] text-white rounded-full px-8 py-3.5 text-base font-semibold shadow-xl shadow-[#00a3e0]/25 hover:shadow-2xl hover:shadow-[#00a3e0]/40 transition-all overflow-hidden"
+            whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
+            whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+            className="w-full sm:w-auto relative group inline-flex items-center justify-center gap-2 bg-[#00a3e0] hover:bg-[#00b8fc] text-white rounded-full px-7 sm:px-8 py-3.5 text-sm sm:text-base font-semibold shadow-xl shadow-[#00a3e0]/25 hover:shadow-2xl hover:shadow-[#00a3e0]/40 transition-all overflow-hidden"
           >
             {/* Ambient energetic button pulse */}
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
@@ -178,10 +178,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </motion.div>
 
       {/* Enterprise Architecture Visual & Parallax Video Area */}
-      <div
-        className="w-screen relative aspect-[16/9] -mt-4 md:-mt-6"
-        style={{ marginLeft: 'calc(-50vw + 50%)' }}
-      >
+      <div className="w-full relative aspect-[16/10] sm:aspect-[16/9] mt-6 sm:mt-8 md:mt-12 overflow-hidden rounded-2xl max-w-6xl mx-auto">
         {/* Background Video */}
         <video
           autoPlay
@@ -193,29 +190,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         />
 
         {/* Hero System Dashboard Graphic with Parallax & Scale */}
-        <div className="absolute inset-0 flex items-center justify-center z-20 px-4">
+        <div className="absolute inset-0 flex items-center justify-center z-20 px-2 sm:px-4">
           <motion.div
-            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 40 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             style={{ y: dashboardY, scale: dashboardScale }}
-            className="max-w-5xl w-[90%] relative group"
+            className="w-full relative group"
           >
-            <div className="rounded-2xl border border-white/10 shadow-2xl overflow-hidden bg-black/40 backdrop-blur-sm p-1.5 ring-1 ring-white/10">
+            <div className="rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl overflow-hidden bg-black/40 backdrop-blur-sm p-1 sm:p-1.5 ring-1 ring-white/10">
               <img
                 src="/hero-dashboard.png"
                 alt="ACS Enterprise Architecture & Systems Dashboard"
-                className="w-full h-auto rounded-xl object-cover"
+                className="w-full h-auto rounded-lg sm:rounded-xl object-cover"
                 style={{ mixBlendMode: 'luminosity' }}
               />
             </div>
             {/* Subtle glow border around dashboard */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-brand-cyan/20 via-white/5 to-brand-cyan/15 rounded-2xl blur-xl opacity-50 -z-10 group-hover:opacity-80 transition-opacity" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-brand-cyan/20 via-white/5 to-brand-cyan/15 rounded-xl sm:rounded-2xl blur-xl opacity-50 -z-10 group-hover:opacity-80 transition-opacity" />
           </motion.div>
         </div>
 
         {/* Bottom Fade Gradient */}
-        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/80 to-transparent z-30 pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-28 sm:h-44 bg-gradient-to-t from-black via-black/80 to-transparent z-30 pointer-events-none" />
       </div>
     </section>
   );
