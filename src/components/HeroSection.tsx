@@ -28,12 +28,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const dashboardY = useTransform(
     scrollYProgress,
     [0, 1],
-    prefersReducedMotion ? [0, 0] : [0, -140]
+    prefersReducedMotion ? [0, 0] : [0, -24]
   );
   const dashboardScale = useTransform(
     scrollYProgress,
     [0, 1],
-    prefersReducedMotion ? [1, 1] : [1, 0.98]
+    prefersReducedMotion ? [1, 1] : [1, 0.99]
   );
 
   const headlineWords = [
@@ -178,41 +178,40 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </motion.div>
 
       {/* Enterprise Architecture Visual & Parallax Video Area */}
-      <div className="w-full relative aspect-[16/10] sm:aspect-[16/9] mt-6 sm:mt-8 md:mt-12 overflow-hidden rounded-2xl max-w-6xl mx-auto">
+      <div className="w-full relative mt-6 sm:mt-10 md:mt-14 overflow-hidden rounded-2xl sm:rounded-3xl max-w-6xl mx-auto px-2 sm:px-6 md:px-12 py-10 sm:py-16 md:py-20 flex items-center justify-center">
         {/* Background Video */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-45 pointer-events-none filter contrast-125"
+          className="absolute inset-0 w-full h-full object-cover opacity-65 pointer-events-none filter contrast-125 saturate-110"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4"
         />
 
-        {/* Hero System Dashboard Graphic with Parallax & Scale */}
-        <div className="absolute inset-0 flex items-center justify-center z-20 px-2 sm:px-4">
-          <motion.div
-            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            style={{ y: dashboardY, scale: dashboardScale }}
-            className="w-full relative group"
-          >
-            <div className="rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl overflow-hidden bg-black/40 backdrop-blur-sm p-1 sm:p-1.5 ring-1 ring-white/10">
-              <img
-                src="/hero-dashboard.png"
-                alt="ACS Enterprise Architecture & Systems Dashboard"
-                className="w-full h-auto rounded-lg sm:rounded-xl object-cover"
-                style={{ mixBlendMode: 'luminosity' }}
-              />
-            </div>
-            {/* Subtle glow border around dashboard */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-brand-cyan/20 via-white/5 to-brand-cyan/15 rounded-xl sm:rounded-2xl blur-xl opacity-50 -z-10 group-hover:opacity-80 transition-opacity" />
-          </motion.div>
-        </div>
+        {/* Ambient Top & Bottom Blends on Video (Behind Dashboard) */}
+        <div className="absolute top-0 inset-x-0 h-10 sm:h-16 bg-gradient-to-b from-background/90 via-background/40 to-transparent z-10 pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-12 sm:h-20 bg-gradient-to-t from-background via-background/50 to-transparent z-10 pointer-events-none" />
 
-        {/* Bottom Fade Gradient */}
-        <div className="absolute bottom-0 inset-x-0 h-28 sm:h-44 bg-gradient-to-t from-black via-black/80 to-transparent z-30 pointer-events-none" />
+        {/* Hero System Dashboard Graphic with Parallax & Scale */}
+        <motion.div
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          style={{ y: dashboardY, scale: dashboardScale }}
+          className="w-[92%] sm:w-[86%] md:w-[80%] lg:w-[76%] max-w-4xl relative z-20 group"
+        >
+          <div className="rounded-xl sm:rounded-2xl border border-white/20 shadow-2xl overflow-hidden bg-black/60 backdrop-blur-md p-1 sm:p-1.5 ring-1 ring-white/10">
+            <img
+              src="/hero-dashboard.png"
+              alt="ACS Enterprise Architecture & Systems Dashboard"
+              className="w-full h-auto rounded-lg sm:rounded-xl block object-contain shadow-inner"
+              style={{ mixBlendMode: 'luminosity' }}
+            />
+          </div>
+          {/* Subtle glow border around dashboard */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-brand-cyan/25 via-white/10 to-brand-cyan/20 rounded-xl sm:rounded-2xl blur-xl opacity-60 -z-10 group-hover:opacity-90 transition-opacity" />
+        </motion.div>
       </div>
     </section>
   );
