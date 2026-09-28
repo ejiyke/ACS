@@ -12,7 +12,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const sectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
-  // Scroll driven transforms for Hero Text and Dashboard Showcase
+  // Scroll driven transforms for Hero Text
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
@@ -20,21 +20,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   const heroTextY = useTransform(
     scrollYProgress,
-    [0, 0.45],
-    prefersReducedMotion ? [0, 0] : [0, -100]
+    [0, 0.85],
+    prefersReducedMotion ? [0, 0] : [0, -50]
   );
-  const heroTextOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
-
-  const dashboardY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? [0, 0] : [0, -24]
-  );
-  const dashboardScale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? [1, 1] : [1, 0.99]
-  );
+  const heroTextOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   const headlineWords = [
     'Empowering',
@@ -74,11 +63,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-background pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-24 px-4 sm:px-6"
+      className="relative w-full overflow-hidden bg-background pt-24 sm:pt-28 md:pt-36 pb-20 sm:pb-24 md:pb-32 px-4 sm:px-6"
       id="hero"
     >
+      {/* Cinematic Background Video Layer */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-85 filter brightness-125 contrast-110 saturate-125"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4"
+        />
+        {/* Subtle dark tint and edge fades to keep background bright while preserving legibility and clean borders */}
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-transparent to-background/85" />
+      </div>
+
       {/* Ambient background cyan radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[1000px] h-[350px] sm:h-[450px] bg-brand-cyan/[0.05] blur-[100px] sm:blur-[140px] pointer-events-none rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[1000px] h-[350px] sm:h-[450px] bg-brand-cyan/[0.08] blur-[100px] sm:blur-[140px] pointer-events-none rounded-full z-10" />
 
       {/* Hero Content Area */}
       <motion.div
@@ -103,7 +107,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-[28px] leading-[1.2] sm:text-4xl md:text-6xl lg:text-7xl tracking-tight font-medium sm:leading-[1.14] mb-5 sm:mb-6 text-foreground max-w-4xl flex flex-wrap justify-center gap-x-[0.25em] sm:gap-x-[0.3em] gap-y-0.5 sm:gap-y-1"
+          className="text-[28px] leading-[1.2] sm:text-4xl md:text-6xl lg:text-7xl tracking-tight font-medium sm:leading-[1.14] mb-5 sm:mb-6 text-foreground max-w-4xl flex flex-wrap justify-center gap-x-[0.25em] sm:gap-x-[0.3em] gap-y-0.5 sm:gap-y-1 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]"
         >
           {headlineWords.map((word, idx) => (
             <motion.span
@@ -150,7 +154,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{ color: 'hsl(var(--hero-subtitle))' }}
-          className="text-sm sm:text-base md:text-lg font-normal leading-relaxed opacity-90 mb-6 sm:mb-8 max-w-2xl sm:max-w-3xl text-center px-1"
+          className="text-sm sm:text-base md:text-lg font-normal leading-relaxed opacity-95 mb-6 sm:mb-8 max-w-2xl sm:max-w-3xl text-center px-1 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
         >
           Integrating IT strategy, financial systems modernization, project management, and business process transformation to deliver mission-critical results.
         </motion.p>
@@ -176,43 +180,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </motion.a>
         </motion.div>
       </motion.div>
-
-      {/* Enterprise Architecture Visual & Parallax Video Area */}
-      <div className="w-full relative mt-6 sm:mt-10 md:mt-14 overflow-hidden rounded-2xl sm:rounded-3xl max-w-6xl mx-auto px-2 sm:px-6 md:px-12 py-10 sm:py-16 md:py-20 flex items-center justify-center">
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-65 pointer-events-none filter contrast-125 saturate-110"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4"
-        />
-
-        {/* Ambient Top & Bottom Blends on Video (Behind Dashboard) */}
-        <div className="absolute top-0 inset-x-0 h-10 sm:h-16 bg-gradient-to-b from-background/90 via-background/40 to-transparent z-10 pointer-events-none" />
-        <div className="absolute bottom-0 inset-x-0 h-12 sm:h-20 bg-gradient-to-t from-background via-background/50 to-transparent z-10 pointer-events-none" />
-
-        {/* Hero System Dashboard Graphic with Parallax & Scale */}
-        <motion.div
-          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          style={{ y: dashboardY, scale: dashboardScale }}
-          className="w-[92%] sm:w-[86%] md:w-[80%] lg:w-[76%] max-w-4xl relative z-20 group"
-        >
-          <div className="rounded-xl sm:rounded-2xl border border-white/20 shadow-2xl overflow-hidden bg-black/60 backdrop-blur-md p-1 sm:p-1.5 ring-1 ring-white/10">
-            <img
-              src="/hero-dashboard.png"
-              alt="ACS Enterprise Architecture & Systems Dashboard"
-              className="w-full h-auto rounded-lg sm:rounded-xl block object-contain shadow-inner"
-              style={{ mixBlendMode: 'luminosity' }}
-            />
-          </div>
-          {/* Subtle glow border around dashboard */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-brand-cyan/25 via-white/10 to-brand-cyan/20 rounded-xl sm:rounded-2xl blur-xl opacity-60 -z-10 group-hover:opacity-90 transition-opacity" />
-        </motion.div>
-      </div>
     </section>
   );
 };
