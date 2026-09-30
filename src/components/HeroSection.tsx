@@ -68,13 +68,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     >
       {/* Cinematic Background Video Layer */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
+        <img
+          src="/hero_background.webp"
+          alt="Hero background animation"
           className="w-full h-full object-cover opacity-85 filter brightness-125 contrast-110 saturate-125"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4"
         />
         {/* Subtle dark tint and edge fades to keep background bright while preserving legibility and clean borders */}
         <div className="absolute inset-0 bg-black/30" />
